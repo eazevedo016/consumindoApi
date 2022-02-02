@@ -1,13 +1,22 @@
 const cors = require('cors')
 const express = require('express')
 const app = express()
+const axios = require('axios')
 
 app.use(cors())
 
 
-app.get('/', (req,res) => {
-    return res.json({message: 'okasdsa'})
-})
+app.get('/', async(req,res) => {
 
+    try {   const { data }  = await axios('https://jsonplaceholder.typicode.com/users')
+
+    return res.json(data)
+        
+    } catch (error) {
+        
+        console.error(error)
+    }
+    // response é a resposta do axios, o data é extraído de dentro do response
+})
 
 app.listen('4679') 
